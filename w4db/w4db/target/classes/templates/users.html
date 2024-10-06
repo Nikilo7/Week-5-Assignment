@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        a.button {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        a.button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>User List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.email}"></td>
+                <td>
+                    <a th:href="@{/users/edit/{id}(id=${user.id})}">Edit</a>
+                    <a th:href="@{/users/delete/{id}(id=${user.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/logout}" class="button">Logout</a>
+</body>
+</html>
